@@ -4,10 +4,6 @@ const mongoose = require('mongoose');
 
 var User = mongoose.model('User');
 
-//                                              Tasks 
-// 1. let if user have more than 2 of loginAttempts and he made a succeeded login let loginAttempts = 0 
-// 2. Save the email as the user right it and when login bring it as lowercase
-
 passport.use(
     new localStrategy({ usernameField: 'email' },
     // Email chack
