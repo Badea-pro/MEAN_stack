@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 
 var User = mongoose.model('User');
 
+//                                              Tasks 
+// 1. let if user have more than 2 of loginAttempts and he made a succeeded login let loginAttempts = 0 
+// 2. Save the email as the user right it and when login bring it as lowercase
+
 passport.use(
     new localStrategy({ usernameField: 'email' },
     // Email chack
@@ -30,17 +34,16 @@ passport.use(
                     // authentication succeeded
                     else {
                         // If user has more than 3 login attempts
-                        if (user?.loginAttempts > 3) {
+                        if (user?.loginAttempts >= 3) {
                             return done(null, false, { message: 'Pleas contact the admin by : Badeakhalboos@gmail.com.' });
                         }
-                        
-                        // Let loginAttempts = 0 after sucseed login and the suiser have less than 3 loginAttempts
+
                         User.findOneAndUpdate({email : username.toLowerCase()}, {$set:{loginAttempts:0}}, {new:true}).then(a => {console.log(a); 
                         })
+
                         return done(null, user);
-                    }
                         
-                    
+                    }
                 });
         })
 );
