@@ -33,6 +33,10 @@ passport.use(
                         if (user?.loginAttempts > 3) {
                             return done(null, false, { message: 'Pleas contact the admin by : Badeakhalboos@gmail.com.' });
                         }
+                        
+                        // Let loginAttempts = 0 after sucseed login and the suiser have less than 3 loginAttempts
+                        User.findOneAndUpdate({email : username.toLowerCase()}, {$set:{loginAttempts:0}}, {new:true}).then(a => {console.log(a); 
+                        })
                         return done(null, user);
                     }
                         
