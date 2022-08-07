@@ -4,7 +4,6 @@ const _ = require('lodash');
 
 const User = mongoose.model('User');
 
-// If there a Duplicate email
 
 module.exports.register = (req, res, next) => {
     var user = new User();
@@ -13,6 +12,7 @@ module.exports.register = (req, res, next) => {
     user.email = req.body.email.toLowerCase();
     user.password = req.body.password;
     user.save((err, doc) => {
+        // If there a Duplicate email
         if (!err)
             res.send(doc);
         else {
